@@ -3,22 +3,20 @@
 <!doctype html>
 <html lang="en">
   <head>
-
     {% block meta %}
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% endblock %}
 
-    {% block extra_meta %}
-    {% endblock %}
+    {% block extra_meta %}{% endblock %}
 
     {% block corecss %}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% endblock %}
 
-    {% block extra_css %}
-    {% endblock %}
+    {% block extra_css %}{% endblock %}
 
     {% block corejs %}
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -26,27 +24,67 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     {% endblock %}
 
-    {% block extra_js %}
-    {% endblock %}
+    {% block extra_js %}{% endblock %}
 
     <title>LocalEatz {% block extra_title %}{% endblock %}</title>
   </head>
   <body>
-    <header class="container-fluid fixed-top"></header>
+    <!-- Header Section -->
+    <header class="d-flex flex-column align-items-center">
+        <h1 class="text-primary mt-3">LocalEatz</h1>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgba(0, 0, 0, 0.8); width: 100%;">
+            <!-- Navbar toggle button for mobile view -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                    <!-- Navigation links for authenticated users -->
+                    <li class="nav-item">
+                        <a href="{% url 'home' %}" class="btn btn-primary m-1">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary m-1" href="#">My Bookings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary m-1" href="{% url 'account_logout' %}">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary m-1" href="#">Contact Us</a>
+                    </li>
 
-    {% if messages %}
-        <div class="message-container"></div>
-    {% endif %}
+                    {% else %}
+                    <!-- Navigation links for non-authenticated users -->
+                    <li class="nav-item">
+                        <a href="#" class="btn btn-primary m-1">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary m-1" href="{% url 'account_signup' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary m-1" href="{% url 'account_login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary m-1" href="#">Contact Us</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
 
-    {% block page_header %}
-    {% endblock %}
+    <!-- Main Content Section -->
+    <main class="container py-4">
+        {% block content %}{% endblock %}
+    </main>
 
-    {% block content %}
-    {% endblock %}
+    <!-- Footer Section -->
+    <footer class="bg-dark text-center text-white py-3">
+        <p>&copy; 2024 LocalEatz. All rights reserved.</p>
+    </footer>
 
-    {% block postloadjs %}
-    {% endblock %}
-
-    
+    {% block postloadjs %}{% endblock %}
   </body>
 </html>
