@@ -2,89 +2,117 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     {% block meta %}
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% endblock %}
 
     {% block extra_meta %}{% endblock %}
 
     {% block corecss %}
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% endblock %}
 
     {% block extra_css %}{% endblock %}
 
     {% block corejs %}
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/60ba5f41d7.js" crossorigin="anonymous"></script>
     {% endblock %}
 
     {% block extra_js %}{% endblock %}
 
     <title>LocalEatz {% block extra_title %}{% endblock %}</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <!-- Header Section -->
     <header class="d-flex flex-column align-items-center">
         <h1 class=" mt-1">LocalEatz</h1>
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgba(0, 0, 0, 0.8); width: 100%;">
-            <!-- Navbar toggle button for mobile view -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                <ul class="navbar-nav">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto text-center">
                     {% if user.is_authenticated %}
-                    <!-- Navigation links for authenticated users -->
                     <li class="nav-item">
-                        <a href="{% url 'home' %}" class="btn btn-primary m-1">Home</a>
+                        <a href="{% url 'home' %}" class="custom-btn">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary m-1" href="#">My Bookings</a>
+                        <a class="custom-btn" href="#">My Bookings</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary m-1" href="#">Contact Us</a>
+                        <a class="custom-btn" href="#">Contact Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary m-1" href="{% url 'account_logout' %}">Logout</a>
+                        <a class="custom-btn" href="{% url 'account_logout' %}">Logout</a>
                     </li>
                     
                     {% else %}
-                    <!-- Navigation links for non-authenticated users -->
                     <li class="nav-item">
-                        <a href="#" class="btn btn-primary m-1">Home</a>
+                        <a href="#" class="custom-btn">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary m-1" href="{% url 'account_signup' %}">Register</a>
+                        <a class="custom-btn" href="{% url 'account_signup' %}">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary m-1" href="{% url 'account_login' %}">Login</a>
+                        <a class="custom-btn" href="{% url 'account_login' %}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary m-1" href="#">Contact Us</a>
+                        <a class="custom-btn" href="#">Contact Us</a>
                     </li>
                     {% endif %}
                 </ul>
             </div>
         </nav>
+
     </header>
 
     <!-- Main Content Section -->
-    <main class="container mt-5 mb-5">
+    <main class="container mt-7 mb-7">
         {% block content %}{% endblock %}
     </main>
 
     <!-- Footer Section -->
     <footer class="bg-dark text-center text-white py-3">
+        <!-- Social Media Links -->
+        <div class="social-icons mb-3">
+            <a href="https://facebook.com" target="_blank" rel="noopener" class="text-white mx-3">
+                <i class="fab fa-facebook fa-lg"></i>
+            </a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="text-white mx-3">
+                <i class="fab fa-instagram fa-lg"></i>
+            </a>
+            <a href="https://ie.linkedin.com/" target="_blank" rel="noopener" class="text-white mx-3">
+                <i class="fab fa-linkedin fa-lg"></i>
+            </a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener" class="text-white mx-3">
+                <i class="fab fa-youtube fa-lg"></i>
+            </a>
+            <a href="https://ie.pinterest.com/" target="_blank" rel="noopener" class="text-white mx-3">
+                <i class="fab fa-pinterest fa-lg"></i>
+            </a>
+        </div>
+        <!-- Copyright Section -->
         <p>&copy; 2024 LocalEatz. All rights reserved.</p>
     </footer>
-
+    
     {% block postloadjs %}{% endblock %}
-  </body>
+</body>
+
 </html>
