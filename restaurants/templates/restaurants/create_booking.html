@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Create Booking{% endblock %}
+
+{% block content %}
+<div class="container my-3">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 form-container">
+            <h5 class="text-center mb-3">Book a Table at {{ restaurant.name }}</h5>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group mb-2 mt-2">
+                    {{ form|crispy }}
+                </div>
+                <div class="d-flex justify-content-between mt-2">
+                    
+                    <a href="{% url 'restaurant_list' %}" class="btn btn-primary btn-sm px-4 py-2">Back</a>
+                    <button type="submit" class="btn btn-primary btn-sm px-4 py-2">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

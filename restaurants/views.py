@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Restaurant, Booking
 from datetime import date
+from .forms import BookingForm
 
 # Create your views here.
 
@@ -56,7 +57,7 @@ def create_booking(request, restaurant_id):
     else:
         form = BookingForm()
 
-    return render(request, 'create_booking.html', {'form': form, 'restaurant': restaurant})
+    return render(request, 'restaurants/create_booking.html', {'form': form, 'restaurant': restaurant})
 
 
 @login_required
