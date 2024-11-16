@@ -31,7 +31,7 @@
   <body>
     <!-- Header Section -->
     <header class="d-flex flex-column align-items-center">
-        <h1 class=" mt-3">LocalEatz</h1>
+        <h1 class=" mt-1">LocalEatz</h1>
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgba(0, 0, 0, 0.8); width: 100%;">
             <!-- Navbar toggle button for mobile view -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -49,12 +49,12 @@
                         <a class="btn btn-primary m-1" href="#">My Bookings</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary m-1" href="{% url 'account_logout' %}">Logout</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="btn btn-primary m-1" href="#">Contact Us</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="btn btn-primary m-1" href="{% url 'account_logout' %}">Logout</a>
+                    </li>
+                    
                     {% else %}
                     <!-- Navigation links for non-authenticated users -->
                     <li class="nav-item">
@@ -76,7 +76,7 @@
     </header>
 
     <!-- Main Content Section -->
-    <main class="container py-4">
+    <main class="container mt-5 mb-5">
         {% block content %}{% endblock %}
     </main>
 

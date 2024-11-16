@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Restaurant Details - Localeatz{% endblock %}
+
+{% block content %}
+    <div class="container text-center py-4">
+        <!-- Restaurant Name -->
+        <h1>{{ restaurant.name }}</h1>
+
+        <!-- Restaurant Details -->
+        <p>{{ restaurant.description }}</p>
+        <p><strong>Address:</strong> {{ restaurant.address }}</p>
+        <p><strong>Cuisine Type:</strong> {{ restaurant.cuisine_type }}</p>
+
+        <!-- Button Container for Center Alignment -->
+        <div class="d-flex justify-content-center mt-3">
+            <!-- Back to Restaurant List Button -->
+            <a href="{% url 'restaurant_list' %}" class="btn btn-primary" style="margin-right: 15px;">Restaurant List</a>
+        
+            <!-- Book Now Button -->
+            <a href="{% url 'create_booking' restaurant.id %}" class="btn btn-primary">Book Now</a>
+        </div>
+        
+    </div>
+{% endblock %}

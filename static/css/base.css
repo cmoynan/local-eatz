@@ -33,7 +33,6 @@ header h1 {
     text-shadow: 2px 2px 4px rgba(255, 20, 147, 0.7);
 }
 
-/* Welcome screen styling */
 .welcome-screen {
     display: flex;
     flex-direction: column;
@@ -76,6 +75,55 @@ header h1 {
     border-color: #ff4081;
 }
 
+.restaurant-item {
+    background: rgba(255, 20, 147, 0.1); /* Light funky pink background */
+    border-radius: 8px; /* Rounded corners */
+    padding: 1.5rem; /* Padding inside the item */
+    margin-bottom: 1.5rem; /* Space between items */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    text-align: center; /* Center-align text */
+    transition: background 0.3s ease, transform 0.3s ease; /* Smooth transition effects */
+}
+
+.restaurant-item:hover {
+    background: rgba(255, 20, 147, 0.2); /* Slightly darker background on hover */
+    transform: translateY(-5px); /* Lift effect on hover */
+}
+
+.restaurant-item img {
+    border-radius: 8px; /* Rounded corners for images */
+    max-width: 100%; /* Responsive image width */
+    height: auto; /* Maintain aspect ratio */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow for images */
+}
+
+/* Booking Button Styling */
+.book-now-button {
+    display: inline-block; /* Align as inline block */
+    background: #ff4081; /* Funky pink background color */
+    color: #fff; /* White text color */
+    padding: 0.75rem 1.5rem; /* Padding inside the button */
+    text-decoration: none; /* Remove underline from text */
+    border-radius: 4px; /* Rounded corners */
+    transition: background 0.3s ease, transform 0.3s ease; /* Smooth transition effects */
+    font-size: 1.1rem; /* Font size */
+    border: 2px solid #fff; /* White border around the button */
+}
+
+.book-now-button:hover {
+    background: #e91e63; /* Darker pink on hover */
+    transform: scale(1.05); /* Slightly enlarge button on hover */
+    text-decoration: none; /* Remove underline from text */
+}
+
+
+.btn-primary {
+    background-color: #ff4081;
+    color: #fff;
+    border-radius: 4px;
+    border-color: #ff4081;
+}
+
 .btn-primary:hover {
     background-color: #ee9db8;
     transform: scale(1.05);
@@ -112,5 +160,5 @@ footer {
     bottom: 0;
     left: 0;
     z-index: 1000;
-    border-top: 2px solid #ff4081;
+    border-top: 2px solid #ff4081; 
 }
