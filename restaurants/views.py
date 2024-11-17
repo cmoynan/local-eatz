@@ -48,16 +48,25 @@ def create_booking(request, restaurant_id):
             if existing_bookings < restaurant.max_tables:
                 booking.save()
                 messages.success(request, "Your booking was successfully created!")
-                return redirect('my_bookings')
+                return redirect('booking_success', booking_id=booking.id)
             else:
                 messages.error(
                     request,
                     "Unfortunately, the restaurant is fully booked at this time. Please try another slot."
                 )
+        else:
+            messages.error(request, "There was an issue with your form. Please check the details and try again.")
     else:
         form = BookingForm()
 
     return render(request, 'restaurants/create_booking.html', {'form': form, 'restaurant': restaurant})
+
+def booking_success(request, booking_id):
+    """
+    View to display booking success details.
+    """
+    booking = get_object_or_404(Booking, pk=booking_id)
+    return render(request, 'restaurants/booking_success.html', {'booking': booking})
 
 
 @login_required
