@@ -4,8 +4,13 @@ from django.contrib import messages
 from .models import Restaurant, Booking
 from datetime import date
 from .forms import BookingForm
+from django.db.models import Count
+from django.utils import timezone
+from django.utils.timezone import now
+import datetime
 
 # Create your views here.
+
 
 @login_required
 def restaurant_list(request):
@@ -31,35 +36,46 @@ def create_booking(request, restaurant_id):
     Requires the user to be logged in.
     """
     restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
+    
+    current_datetime = datetime.datetime.now()
 
+    available_time_slots = [
+        slot for slot in [datetime.time(hour) for hour in range(12, 22)]
+        if Booking.objects.filter(restaurant=restaurant, date=request.POST.get('date'), time=slot).count() < restaurant.max_tables
+    ]
+    
     if request.method == "POST":
-        form = BookingForm(request.POST)
+        form = BookingForm(request.POST, available_time_slots=available_time_slots)
         if form.is_valid():
-            # Save the booking instance
             booking = form.save(commit=False)
             booking.user = request.user
             booking.restaurant = restaurant
 
-            # Check availability logic
-            existing_bookings = Booking.objects.filter(
-                restaurant=restaurant, date=booking.date, time=booking.time
-            ).count()
-
-            if existing_bookings < restaurant.max_tables:
-                booking.save()
-                messages.success(request, "Your booking was successfully created!")
-                return redirect('booking_success', booking_id=booking.id)
+            booking_datetime = datetime.datetime.combine(booking.date, booking.time)
+            if booking_datetime < current_datetime:
+                messages.error(request, "You cannot book a table in the past. Please choose a valid time.")
             else:
-                messages.error(
-                    request,
-                    "Unfortunately, the restaurant is fully booked at this time. Please try another slot."
-                )
+
+                existing_bookings = Booking.objects.filter(
+                    restaurant=restaurant, date=booking.date, time=booking.time
+                ).count()
+
+                if existing_bookings < restaurant.max_tables:
+                    booking.save()
+                    messages.success(request, "Your booking was successfully created!")
+                    return redirect('booking_success', booking_id=booking.id)
+                else:
+                    messages.error(
+                        request,
+                        "Unfortunately, the restaurant is fully booked at this time. Please try another slot."
+                    )
         else:
             messages.error(request, "There was an issue with your form. Please check the details and try again.")
     else:
-        form = BookingForm()
+        form = BookingForm(available_time_slots=available_time_slots)
 
     return render(request, 'restaurants/create_booking.html', {'form': form, 'restaurant': restaurant})
+
 
 def booking_success(request, booking_id):
     """
@@ -92,20 +108,52 @@ def cancel_booking(request, booking_id):
 
     return render(request, 'restaurants/cancel_booking.html', {'booking': booking})
 
+
 @login_required
 def edit_booking(request, booking_id):
     """
-    Edit an existing booking.
+    View to edit an existing booking.
+    Requires the user to be logged in and the booking to belong to the user.
     """
     booking = get_object_or_404(Booking, pk=booking_id, user=request.user)
+    restaurant = booking.restaurant
+    
+    current_datetime = datetime.datetime.now()
 
-    if request.method == 'POST':
-        form = BookingForm(request.POST, instance=booking)
+    available_time_slots = [
+        slot for slot in [datetime.time(hour) for hour in range(12, 22)]
+        if Booking.objects.filter(restaurant=restaurant, date=request.POST.get('date'), time=slot).count() < restaurant.max_tables
+    ]
+
+    if request.method == "POST":
+        form = BookingForm(request.POST, instance=booking, available_time_slots=available_time_slots)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Your booking has been updated!')
-            return redirect('my_bookings')
-    else:
-        form = BookingForm(instance=booking)
+            booking = form.save(commit=False)
+            booking.restaurant = restaurant
+            booking.user = request.user
+            
+            booking_datetime = datetime.datetime.combine(booking.date, booking.time)
+            if booking_datetime < current_datetime:
+                messages.error(request, "You cannot book a table in the past. Please choose a valid time.")
+            else:
 
-    return render(request, 'restaurants/edit_booking.html', {'form': form, 'booking': booking})
+                existing_bookings = Booking.objects.filter(
+                    restaurant=restaurant, date=booking.date, time=booking.time
+                ).count()
+
+                if existing_bookings < restaurant.max_tables:
+                    booking.save()
+                    messages.success(request, "Your booking was successfully updated!")
+                    return redirect('my_bookings')
+                else:
+                    messages.error(
+                        request,
+                        "Unfortunately, the restaurant is fully booked at this time. Please try another slot."
+                    )
+        else:
+            messages.error(request, "There was an issue with your form. Please check the details and try again.")
+    else:
+        form = BookingForm(instance=booking, available_time_slots=available_time_slots)
+
+    return render(request, 'restaurants/edit_booking.html', {'form': form, 'restaurant': restaurant, 'booking': booking})
+
