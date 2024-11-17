@@ -54,7 +54,7 @@
                         <a href="{% url 'home' %}" class="custom-btn">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="custom-btn" href="#">My Bookings</a>
+                        <a class="custom-btn" href="{% url 'my_bookings' %}">My Bookings</a>
                     </li>
                     <li class="nav-item">
                         <a class="custom-btn" href="#">Contact Us</a>
@@ -111,6 +111,58 @@
         <!-- Copyright Section -->
         <p>&copy; 2024 LocalEatz. All rights reserved.</p>
     </footer>
+
+    {% if messages %}
+    <div class="message-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert">
+            <!-- Different message styling for error, success, info, and warning levels -->
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <div class="alert alert-danger border-danger">
+                <strong>Error!</strong> {{ message }}
+                <button type="button" class="btn-close" onclick="this.parentElement.parentElement.style.display='none';"
+                    aria-label="Close">
+                    <span>&times;</span>
+                </button>
+            </div>
+            {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <div class="alert alert-success border-success">
+                <strong>Success!</strong> {{ message }}
+                <button type="button" class="btn-close" onclick="this.parentElement.parentElement.style.display='none';"
+                    aria-label="Close">
+                    <span>&times;</span>
+                </button>
+            </div>
+            {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+            <div class="alert alert-info border-info">
+                <strong>Info!</strong> {{ message }}
+                <button type="button" class="btn-close" onclick="this.parentElement.parentElement.style.display='none';"
+                    aria-label="Close">
+                    <span>&times;</span>
+                </button>
+            </div>
+            {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+            <div class="alert alert-warning border-warning">
+                <strong>Warning!</strong> {{ message }}
+                <button type="button" class="btn-close" onclick="this.parentElement.parentElement.style.display='none';"
+                    aria-label="Close">
+                    <span>&times;</span>
+                </button>
+            </div>
+            {% else %}
+            <div class="alert alert-dark border-dark">
+                {{ message }}
+                <button type="button" class="btn-close" onclick="this.parentElement.parentElement.style.display='none';"
+                    aria-label="Close">
+                    <span>&times;</span>
+                </button>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     
     {% block postloadjs %}{% endblock %}
 </body>

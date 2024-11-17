@@ -97,6 +97,70 @@ header h1 {
     margin: 0 auto;
 }
 
+.booking-item {
+    background: rgba(255, 0, 230, 0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.booking-item:hover {
+    background: rgba(255, 0, 225, 0.2);
+    transform: translateY(-5px); 
+}
+
+.message-container {
+    position: fixed;
+    top: 72px;
+    right: 15px;
+    z-index: 99999999999;
+}
+
+/* Alert box styling */
+.alert {
+    background-color: #ff1493;
+    border: 1px solid #e60073;
+    color: white; 
+    margin: 15px;
+    padding: 15px;
+    min-width: 250px;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    padding-right: 35px;
+    font-size: 14px;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+/* Adding hover effect */
+.alert:hover {
+    transform: scale(1.05);
+    border-color: #ff0080;
+}
+
+.alert .close:hover {
+    color: #fcfcfc;
+}
+
+/* Close button styling */
+.btn-close {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: inherit;
+    opacity: .5;
+    padding: 0;
+    cursor: pointer;
+}
+
 .form-container {
     background: rgba(255, 20, 147, 0.1);
     border-radius: 8px;

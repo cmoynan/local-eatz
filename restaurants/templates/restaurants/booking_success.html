@@ -18,7 +18,7 @@
         <p><strong>Special Requests:</strong> {{ booking.special_requests }}</p>
         {% endif %}
         <div class="text-center mt-3">
-            <a href="#" class="btn btn-primary btn-sm">View My Bookings</a>
+            <a href="{% url 'my_bookings' %}" class="btn btn-primary btn-sm">View My Bookings</a>
         </div>
     </div>
 </div>

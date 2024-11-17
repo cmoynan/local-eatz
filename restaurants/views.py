@@ -75,7 +75,7 @@ def my_bookings(request):
     View to list all bookings made by the logged-in user.
     """
     bookings = Booking.objects.filter(user=request.user).order_by('-date', '-time')
-    return render(request, 'my_bookings.html', {'bookings': bookings})
+    return render(request, 'restaurants/my_bookings.html', {'bookings': bookings})
 
 
 @login_required
@@ -90,5 +90,22 @@ def cancel_booking(request, booking_id):
         messages.success(request, "Your booking was successfully canceled.")
         return redirect('my_bookings')
 
-    return render(request, 'cancel_booking.html', {'booking': booking})
+    return render(request, 'restaurants/cancel_booking.html', {'booking': booking})
 
+@login_required
+def edit_booking(request, booking_id):
+    """
+    Edit an existing booking.
+    """
+    booking = get_object_or_404(Booking, pk=booking_id, user=request.user)
+
+    if request.method == 'POST':
+        form = BookingForm(request.POST, instance=booking)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your booking has been updated!')
+            return redirect('my_bookings')
+    else:
+        form = BookingForm(instance=booking)
+
+    return render(request, 'restaurants/edit_booking.html', {'form': form, 'booking': booking})
