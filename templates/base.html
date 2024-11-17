@@ -57,7 +57,7 @@
                         <a class="custom-btn" href="{% url 'my_bookings' %}">My Bookings</a>
                     </li>
                     <li class="nav-item">
-                        <a class="custom-btn" href="#">Contact Us</a>
+                        <a class="custom-btn" href="{% url 'contact:contact' %}">Contact Us</a>
                     </li>
                     <li class="nav-item">
                         <a class="custom-btn" href="{% url 'account_logout' %}">Logout</a>
@@ -65,7 +65,7 @@
                     
                     {% else %}
                     <li class="nav-item">
-                        <a href="#" class="custom-btn">Home</a>
+                        <a href="{% url 'home' %}" class="custom-btn">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="custom-btn" href="{% url 'account_signup' %}">Register</a>
@@ -74,7 +74,7 @@
                         <a class="custom-btn" href="{% url 'account_login' %}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="custom-btn" href="#">Contact Us</a>
+                        <a class="custom-btn" href="{% url 'contact:contact' %}">Contact Us</a>
                     </li>
                     {% endif %}
                 </ul>

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Business Inquiry{% endblock %}
+
+{% block content %}
+
+<div class="container my-3">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 form-container">
+            <h2>Business Inquiry</h2>
+            <p>If you are a business and wish to inquire about listing, please fill in the details below:</p>
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+            </form>
+        </div>
+    </div>
+    {% endblock %}

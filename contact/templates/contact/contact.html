@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-6 form-container">
+        <h2>Contact Us</h2>
+        <p>Please choose the type of inquiry you wish to make:</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="contact_type" value="business" id="business"
+                    required>
+                <label class="form-check-label" for="business">
+                    I am a Business
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="contact_type" value="customer" id="customer"
+                    required>
+                <label class="form-check-label" for="customer">
+                    I am a Customer
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Continue</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
