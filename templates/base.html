@@ -30,7 +30,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/60ba5f41d7.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/60ba5f41d7.js" crossorigin="anonymous"></script>
     {% endblock %}
 
     {% block extra_js %}{% endblock %}
@@ -62,7 +62,7 @@
                     <li class="nav-item">
                         <a class="custom-btn" href="{% url 'account_logout' %}">Logout</a>
                     </li>
-                    
+
                     {% else %}
                     <li class="nav-item">
                         <a href="{% url 'home' %}" class="custom-btn">Home</a>
@@ -163,7 +163,7 @@
     </div>
     {% endif %}
 
-    
+
     {% block postloadjs %}{% endblock %}
 </body>
 

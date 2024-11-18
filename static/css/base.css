@@ -15,6 +15,11 @@ body {
     margin: 0;
 }
 
+main {
+    padding-top: 80px;
+    padding-bottom: 200px;
+}
+
 /* Header Styling */
 header {
     background: rgba(0, 0, 0, 0.8); 
@@ -79,12 +84,24 @@ header h1 {
 .restaurant-item {
     background: rgba(255, 20, 147, 0.1); 
     border-radius: 8px; 
-    padding: 1.5rem;
-    margin-bottom: 1.5rem; 
+    padding: .5rem;
+    margin-bottom: .5rem; 
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
     text-align: center; 
     transition: background 0.3s ease, transform 0.3s ease;
+    width: 100%;
 }
+
+.restaurant-item .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.restaurant-item .btn {
+    width: 100%;
+}
+
 .booking-details {
     background: rgba(255, 20, 147, 0.1);
     border-radius: 8px;
@@ -220,7 +237,7 @@ header h1 {
 }
 
 .navbar-nav {
-    flex-direction: column; /* Stack items in collapsed view */
+    flex-direction: column;
 }
 
 /* Main Content Styling */
@@ -233,10 +250,10 @@ main {
 footer {
     background: rgba(0, 0, 0, 0.8);
     color: #ff4081;
-    padding: 1rem;
     text-align: center;
     position: fixed;
-    height: 10vh;
+    margin-top: 0%;
+    height: 12vh;
     width: 100%; 
     bottom: 0;
     left: 0;
@@ -248,11 +265,15 @@ footer {
     text-decoration: none;
 }
 
-@media (min-width: 768px) {
-    .navbar-nav {
-        flex-direction: row; 
-    }
+@media (max-width: 968px) {
     .custom-btn {
         width: auto;
     }
+
+    footer {
+        height: 6vh;
+    }
+
 }
+
+
