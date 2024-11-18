@@ -1,1 +1,1 @@
-web: gunicorn local-eatz.wsgi:application
+web: gunicorn local-eatz.wsgi
