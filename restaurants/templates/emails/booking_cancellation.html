@@ -1,0 +1,11 @@
+<p>Hello {{ user.first_name }},</p>
+
+<p>We regret to inform you that your booking at {{ booking.restaurant.name }} has been canceled:</p>
+
+<p><strong>Booking Date:</strong> {{ booking.date }}<br>
+<strong>Time:</strong> {{ booking.time|date:"H:i" }}</p>
+
+<p>If you would like to make another booking, please visit our website.</p>
+
+<p>Best regards,<br>
+The LocalEatz Team</p>

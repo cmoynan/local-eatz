@@ -8,6 +8,11 @@ from django.db.models import Count
 from django.utils import timezone
 from django.utils.timezone import now
 import datetime
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.conf import settings
+
 
 # Create your views here.
 
@@ -63,6 +68,22 @@ def create_booking(request, restaurant_id):
                 if existing_bookings < restaurant.max_tables:
                     booking.save()
                     messages.success(request, "Your booking was successfully created!")
+
+                    booking_details = {
+                    'user': request.user,
+                    'booking': booking
+                   }
+
+                    # Send booking Confirmation email
+                    subject = 'Booking Confirmation'
+                    html_message = render_to_string(
+                    'emails/booking_confirmation.html', booking_details,
+                    )
+
+                    plain_message = strip_tags(html_message)
+                    send_mail(subject, plain_message, settings.DEFAULT_FROM_EMAIL,
+                    [request.user.email], html_message=html_message)
+
                     return redirect('booking_success', booking_id=booking.id)
                 else:
                     messages.error(
@@ -104,6 +125,23 @@ def cancel_booking(request, booking_id):
     if request.method == "POST":
         booking.delete()
         messages.success(request, "Your booking was successfully canceled.")
+
+        booking_details = {
+        'user': request.user,
+        'booking': booking
+    }
+
+        # Send booking cancellation email
+        subject = 'Booking Cancellation'
+        html_message = render_to_string(
+        'emails/booking_cancellation.html', booking_details,
+      )
+
+        plain_message = strip_tags(html_message)
+        send_mail(subject, plain_message, settings.DEFAULT_FROM_EMAIL,
+              [request.user.email], html_message=html_message)
+
+
         return redirect('my_bookings')
 
     return render(request, 'restaurants/cancel_booking.html', {'booking': booking})
@@ -144,6 +182,22 @@ def edit_booking(request, booking_id):
                 if existing_bookings < restaurant.max_tables:
                     booking.save()
                     messages.success(request, "Your booking was successfully updated!")
+
+                    booking_details = {
+                    'user': request.user,
+                    'booking': booking
+                    }
+
+                    # Send booking update email
+                    subject = 'Booking Update'
+                    html_message = render_to_string(
+                    'emails/booking_update.html', booking_details,
+                    )
+
+                    plain_message = strip_tags(html_message)
+                    send_mail(subject, plain_message, settings.DEFAULT_FROM_EMAIL,
+                    [request.user.email], html_message=html_message)
+
                     return redirect('my_bookings')
                 else:
                     messages.error(
@@ -156,4 +210,3 @@ def edit_booking(request, booking_id):
         form = BookingForm(instance=booking, available_time_slots=available_time_slots)
 
     return render(request, 'restaurants/edit_booking.html', {'form': form, 'restaurant': restaurant, 'booking': booking})
-
