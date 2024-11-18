@@ -11,6 +11,7 @@ class BusinessInquiry(models.Model):
     email = models.EmailField()
     phone_number = models.CharField(max_length=15, blank=True)
     restaurant_name = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     cuisine_type = models.CharField(max_length=100, blank=True)
     max_tables = models.PositiveIntegerField(default=3)

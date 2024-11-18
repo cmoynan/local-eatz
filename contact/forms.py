@@ -9,4 +9,4 @@ class CustomerContactForm(forms.Form):
 class BusinessInquiryForm(forms.ModelForm):
     class Meta:
         model = BusinessInquiry
-        fields = ['name', 'email', 'phone_number', 'restaurant_name', 'description', 'cuisine_type', 'max_tables']
+        fields = ['name', 'email', 'phone_number', 'restaurant_name', 'address', 'description', 'cuisine_type', 'max_tables']
