@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-lz#5ec0!3f6oyna=9fr%k$&8-5+fln-r9m2de&3(^q!-5z#tr^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [ 'local-eatz-f0cecf1cc4fa.herokuapp.com', '8000-cmoynan-localeatz-q3bsj4iz5g7.ws.codeinstitute-ide.net']
 
@@ -64,6 +64,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'allauth.account.middleware.AccountMiddleware',
