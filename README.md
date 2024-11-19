@@ -1,131 +1,66 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# LocalEatz
 
-Welcome Chris Moynan,
+![image](https://github.com/user-attachments/assets/dbfe5de9-2c60-4234-af02-bfeb569f26ca)
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+## Overview
 
-You can safely delete this README.md file or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **June 18, 2024**
+LocalEatz is a web application designed to simplify the process of booking tables at people's favorite local restaurants. Users can easily register on the website, book tables, and manage their bookings with ease. Whether it's making a new reservation, editing an existing one, or canceling a booking, LocalEatz provides a seamless experience. The platform also keeps users informed with email notifications for every booking action.
 
-## Gitpod Reminders
+In addition to catering to diners, LocalEatz also offers a Business Enquiry section where restaurant owners and businesses can reach out to list their restaurants on the platform. This feature enables restaurants to grow their customer base by making their dining experiences available to a larger audience looking for convenient booking options.
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+# Features
 
-`python3 -m http.server`
+## For Users:
 
-A blue button should appear to click: _Make Public_,
+### Create an Account
+Users can easily create an account on LocalEatz by signing up with their email. The Django Allauth integration ensures a smooth and secure registration process allowing users to either register with their email and password. Once an account is created, users can log in to access all the features on the site. Non users can browse the website but will be prompted to login to make a booking.
 
-Another blue button should appear to click: _Open Browser_.
+![image](https://github.com/user-attachments/assets/47fe3546-cd78-4230-9336-74587210b016)
 
-To run a backend Python file, type `python3 app.py` if your Python file is named `app.py`, of course.
+### Make Bookings
 
-A blue button should appear to click: _Make Public_,
+After logging in, users can browse through the available restaurants and make table reservations. They can choose the date, time, and party size, and even provide special requests for a more personalized dining experience. The platform ensures that users can book tables in real-time, receiving immediate confirmation via email.
 
-Another blue button should appear to click: _Open Browser_.
+![image](https://github.com/user-attachments/assets/34f06eea-3d09-4081-ba83-e31d82bbbc7f)
 
-By Default, Gitpod gives you superuser security privileges. Therefore, you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+![image](https://github.com/user-attachments/assets/78fa29dc-200b-4ee4-9d00-2ab25d0af4e2)
 
-To log into the Heroku toolbelt CLI:
+![image](https://github.com/user-attachments/assets/780ad469-712b-4f94-8a7a-a0e6116d1187)
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you, so do not share it. If you accidentally make it public, you can create a new one with _Regenerate API Key_.
 
-### Connecting your Mongo database
+### Manage Bookings
 
-- **Connect to Mongo CLI on a IDE**
-- navigate to your MongoDB Clusters Sandbox
-- click **"Connect"** button
-- select **"Connect with the MongoDB shell"**
-- select **"I have the mongo shell installed"**
-- choose **mongosh (2.0 or later)** for : **"Select your mongo shell version"**
-- choose option: **"Run your connection string in your command line"**
-- in the terminal, paste the copied code `mongo "mongodb+srv://<CLUSTER-NAME>.mongodb.net/<DBname>" --apiVersion 1 --username <USERNAME>`
-  - replace all `<angle-bracket>` keys with your own data
-- enter password _(will not echo **\*\*\*\*** on screen)_
+Once logged in, users have full control over their bookings. They can view all upcoming reservations, and if needed, they can edit or cancel their bookings directly from their dashboard. Whether it’s adjusting the time or canceling a reservation altogether, users can do so with ease.
 
-------
+![image](https://github.com/user-attachments/assets/014dd7bf-ea54-4091-99f7-94ea88ad178e)
 
-## Release History
+![image](https://github.com/user-attachments/assets/d871682f-8600-4b81-9c45-f425bf132ff3)
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+![image](https://github.com/user-attachments/assets/a51cbeca-ab88-402c-b7d8-c38c3a8eac20)
 
-**June 18, 2024,** Add Mongo back into template
 
-**June 14, 2024,** Temporarily remove Mongo until the key issue is resolved
+### Password Reset
 
-**May 28 2024:** Fix Mongo and Links installs
+In case users forget their passwords, LocalEatz provides a password reset option via Django Allauth. Users can quickly reset their password by receiving a secure password reset link in their email. This ensures that account security and user convenience are prioritized.
 
-**April 26 2024:** Update node version to 16
+![image](https://github.com/user-attachments/assets/f200f1e7-9d89-4244-ad03-644821db4292)
 
-**September 20 2023:** Update Python version to 3.9.17.
+![image](https://github.com/user-attachments/assets/f83cb414-f0bf-4f45-b8c8-9b94ebed8092)
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+![image](https://github.com/user-attachments/assets/651e7093-daed-4736-b337-b7d55d523d93)
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+### Business Enquiry
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+In addition to serving users, LocalEatz also provides a Business Enquiry section where restaurant owners can contact the platform to list their establishments. This feature allows businesses to grow their customer base and make their dining experiences available to a larger audience.
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+![image](https://github.com/user-attachments/assets/ba33832a-5bdc-4c03-89ca-97aa02b43a4a)
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+![image](https://github.com/user-attachments/assets/57b6f02d-cb4f-46c5-9051-fdf0b48c2c6f)
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
-
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
-
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
-
-------
-
-## FAQ about the uptime script
-
-**Why have you added this script?**
-
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
-
-**How will this affect me?**
-
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
-
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
-
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
-
-**So….?**
-
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
-
-**Can I opt out?**
-
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
-
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
-
-**Anything more?**
-
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
-
----
-
-Happy coding!
