@@ -1,10 +1,11 @@
 from django import forms
-from .models import BusinessInquiry
+from .models import BusinessInquiry, CustomerInquiry
 
-class CustomerContactForm(forms.Form):
-    name = forms.CharField(max_length=255)
-    email = forms.EmailField()
-    message = forms.CharField(widget=forms.Textarea)
+class CustomerContactForm(forms.ModelForm):
+    class Meta:
+        model = CustomerInquiry
+        fields = ['name', 'email', 'message']
+
 
 class BusinessInquiryForm(forms.ModelForm):
     class Meta:

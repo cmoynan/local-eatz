@@ -21,21 +21,14 @@ def contact(request):
     return render(request, 'contact/contact.html')
 
 def customer_inquiry_view(request):
-    """
-    This view handles the customer contact form submission.
-    """
     if request.method == 'POST':
         form = CustomerContactForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            message = form.cleaned_data['message']
-
+            form.save()  # Automatically saves to the database
             messages.success(request, 'Your message has been sent successfully!')
             return redirect('contact:thank_you')
         else:
             messages.error(request, 'There was an error with your form.')
-
     else:
         form = CustomerContactForm()
 

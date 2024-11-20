@@ -5,12 +5,11 @@ from .models import BusinessInquiry, CustomerInquiry
 # Register your models here.
 
 
+@admin.register(CustomerInquiry)
 class CustomerInquiryAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'submitted_at')
     search_fields = ('name', 'email')
-    list_filter = ('submitted_at',)
     readonly_fields = ('name', 'email', 'message', 'submitted_at')
-
 
 
 class BusinessInquiryAdmin(admin.ModelAdmin):
@@ -18,4 +17,3 @@ class BusinessInquiryAdmin(admin.ModelAdmin):
     search_fields = ('restaurant_name', 'name', 'email')
 
 admin.site.register(BusinessInquiry, BusinessInquiryAdmin)
-admin.site.register(CustomerInquiry)
