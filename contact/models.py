@@ -20,3 +20,16 @@ class BusinessInquiry(models.Model):
 
     def __str__(self):
         return f"{self.restaurant_name} - {self.name}"
+
+
+class CustomerInquiry(models.Model):
+    """
+    Model to store customer inquiries from the contact form.
+    """
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Inquiry from {self.name} ({self.email})"        
