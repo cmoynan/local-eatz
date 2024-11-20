@@ -16,18 +16,20 @@ class RestaurantListTest(TestCase):
             max_tables=10
         )
         # Create a user and log them in
-        self.user = User.objects.create_user(username='testuser', password='password')
+        self.user = User.objects.create_user(username='testuser',
+                                             password='password')
 
     def test_restaurant_list_access(self):
         # Log in the user before accessing the view
         self.client.login(username='testuser', password='password')
-        
+
         response = self.client.get(reverse('restaurant_list'))
-        
-        # Check the response status and ensure the restaurant name is in the response
+
+        # check response status ensure the restaurant name is in the response
         self.assertEqual(response.status_code, 200)
         # Check that restaurant name is displayed
         self.assertContains(response, 'Test Restaurant')
+
 
 class RestaurantDetailTest(TestCase):
 
@@ -39,7 +41,8 @@ class RestaurantDetailTest(TestCase):
         )
 
     def test_restaurant_detail_access(self):
-        response = self.client.get(reverse('restaurant_detail', args=[self.restaurant.id]))
+        response = self.client.get(reverse('restaurant_detail',
+                                   args=[self.restaurant.id]))
         self.assertEqual(response.status_code, 200)
         # Does restaurant name appears
         self.assertContains(response, 'Test Restaurant')
@@ -49,7 +52,8 @@ class CreateBookingTest(TestCase):
 
     def setUp(self):
         # Create a user for the test
-        self.user = User.objects.create_user(username='testuser', password='password')
+        self.user = User.objects.create_user(username='testuser',
+                                             password='password')
 
         # Create a restaurant for the test
         self.restaurant = Restaurant.objects.create(
@@ -70,7 +74,7 @@ class CreateBookingTest(TestCase):
             'phone_number': "1234567890",
             'date': (datetime.now() + timedelta(days=1)).date(),
             'time': '18:00',
-            'party_size': 4, 
+            'party_size': 4,
         })
 
     def test_create_booking_invalid_data(self):
@@ -81,16 +85,18 @@ class CreateBookingTest(TestCase):
             'name': "John Doe",
             'email': "johndoe@example.com",
             'phone_number': "1234567890",
-            'date': (datetime.now() - timedelta(days=1)).date(), 
+            'date': (datetime.now() - timedelta(days=1)).date(),
             'time': '18:00',
             'party_size': 4,
         })
+
 
 class MyBookingsTest(TestCase):
 
     def setUp(self):
         # Create a user for the test
-        self.user = User.objects.create_user(username='testuser', password='password')
+        self.user = User.objects.create_user(username='testuser',
+                                             password='password')
 
         # Create a restaurant for the test
         self.restaurant = Restaurant.objects.create(
@@ -108,7 +114,8 @@ class MyBookingsTest(TestCase):
             name="John Doe",
             email="johndoe@example.com",
             phone_number="1234567890",
-            date=datetime.today().date() + timedelta(days=1),  # Tomorrow's date
+            # Tomorrow's date
+            date=datetime.today().date() + timedelta(days=1),
             time="18:00",
             party_size=4  # Make sure party_size is included
         )
@@ -120,14 +127,15 @@ class MyBookingsTest(TestCase):
 
     def test_cancel_booking(self):
         # Make a POST request to cancel the booking
-        response = self.client.post(reverse('cancel_booking', args=[self.booking.id]))
-        
+        response = self.client.post(reverse('cancel_booking',
+                                            args=[self.booking.id]))
 
     def test_edit_booking_valid_data(self):
 
         # Post valid data to edit the booking
         new_time = (timezone.now() + timedelta(hours=2)).time()
-        response = self.client.post(reverse('edit_booking', args=[self.booking.id]), {
+        response = self.client.post(reverse('edit_booking',
+                                    args=[self.booking.id]), {
             'name': "Updated Name",
             'email': "updatedemail@example.com",
             'phone_number': "9876543210",
@@ -147,11 +155,11 @@ class MyBookingsTest(TestCase):
         self.assertNotEqual(self.booking.email, "updatedemail@example.com")
         self.assertNotEqual(self.booking.time, new_time)
 
-
     def test_edit_booking_invalid_data_past_date(self):
         # Try to edit the booking with a time in the past (invalid)
-        past_time = (timezone.now() - timedelta(hours=2)).time()  # A time in the past
-        response = self.client.post(reverse('edit_booking', args=[self.booking.id]), {
+        past_time = (timezone.now() - timedelta(hours=2)).time()
+        response = self.client.post(reverse('edit_booking',
+                                            args=[self.booking.id]), {
             'name': "Updated Name",
             'email': "updatedemail@example.com",
             'phone_number': "9876543210",
@@ -163,4 +171,3 @@ class MyBookingsTest(TestCase):
         # Check that the booking is not updated
         self.booking.refresh_from_db()
         self.assertNotEqual(self.booking.time, past_time)
-           

@@ -9,18 +9,26 @@ import datetime
 class BookingForm(forms.ModelForm):
     def __init__(self, *args, available_time_slots=None, **kwargs):
         super().__init__(*args, **kwargs)
-        
+
         if available_time_slots is not None:
-            self.fields['time'].widget = forms.Select(choices=[(slot, slot) for slot in available_time_slots])
-        
+            self.fields['time'].widget = forms.Select(
+             choices=[(slot, slot) for slot in available_time_slots]
+            )
+
         self.fields['party_size'].validators.extend([
-            MinValueValidator(1, message="The party size must be at least 1 person."),
-            MaxValueValidator(10, message="The party size cannot exceed 10 people."),
+            MinValueValidator(
+             1, message="The party size must be at least 1 person."
+            ),
+            MaxValueValidator(
+             10, message="The party size cannot exceed 10 people."
+            )
+
         ])
 
     class Meta:
         model = Booking
-        fields = ['name', 'email', 'phone_number', 'date', 'time', 'party_size', 'special_requests']
+        fields = ['name', 'email', 'phone_number', 'date', 'time',
+                  'party_size', 'special_requests']
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date'}),
             'special_requests': forms.Textarea(attrs={'rows': 3}),
@@ -33,7 +41,7 @@ class BookingForm(forms.ModelForm):
             raise ValidationError("The party size must be at least 1 person.")
         elif party_size > 10:
             raise ValidationError("The party size cannot exceed 10 people.")
-        
+
         return party_size
 
     def clean(self):
@@ -44,13 +52,12 @@ class BookingForm(forms.ModelForm):
         if date and time:
             current_datetime = timezone.now()
 
-            booking_datetime = timezone.make_aware(datetime.datetime.combine(date, time))
+            booking_datetime = timezone.make_aware(
+              datetime.datetime.combine(date, time)
+             )
 
             if booking_datetime < current_datetime:
                 self.add_error('date', 'You cannot book a table in the past.')
                 self.add_error('time', 'You cannot book a table in the past.')
 
         return cleaned_data
-
-
-
